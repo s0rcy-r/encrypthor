@@ -7,8 +7,13 @@
 
 
 ## Description :closed_book:
-EncrypThor was one of my project using Python (it was before COVID, in 2018 ... sweet souvenirs). 
+EncrypThor was one of my project using Python *(it was before COVID, in 2018 ... sweet souvenirs)*. 
+
 EncrypThor is a file encryption method based on AES. It first encrypt the file with a key and then cut the file in multiples parts of random sizes. After that each block is encrypted again with a second key. Then, the result is zipped and encrypted again.
+
+<ins>Here is a schema :</ins>
+
+![Encryption Schema](https://github.com/s0rcy-r/encrypthor/blob/main/static/schema.png)
 
 ## Installation :computer:
 Only one thing to do :
