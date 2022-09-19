@@ -27,7 +27,7 @@ def encryption_protocol_v1(path, keyword, key):
     os.remove(f"{path}.enc")
 
     # Will coming in next updates
-    #encrypthor.shuffle_blocks(path_in=f"{path}.encx")
+    # encrypthor.shuffle_blocks(path_in=f"{path}.encx")
 
     # Remove the clear file
     os.remove(path)
@@ -49,7 +49,7 @@ def decryption_protocol_v1(path, keyword, key):
     key_1 = encrypthor.keys_gen(password=keyword, salt=key)
 
     # Will coming in next updates
-    #encrypthor.sort_blocks(path_in=f"{path}")
+    # encrypthor.sort_blocks(path_in=f"{path}")
 
     # Join the .encx folder
     encrypthor.joinin_blocks(path_in=f"{path}", path_out=f"{path[:-1]}")

@@ -30,7 +30,7 @@ class EncrypThor:
             path_in (str): path of the file
             chunk_size (int, optional): Size of chunks. Defaults to 64*1024.
         """
-        
+
         output_filename = path_in + '.enc'
         iv = os.urandom(16)
         encryptor = AES.new(key, AES.MODE_CBC, iv)
@@ -55,11 +55,12 @@ class EncrypThor:
             path_in (str): path of the file
             chunk_size (int, optional): Size of chunks. Defaults to 24*1024.
         """
-        
+
         output_filename = os.path.splitext(path_in)[0]
         output_filename = output_filename
         with open(path_in, 'rb') as infile:
-            origsize = struct.unpack('<Q', infile.read(struct.calcsize('Q')))[0]
+            origsize = struct.unpack(
+                '<Q', infile.read(struct.calcsize('Q')))[0]
             iv = infile.read(16)
             decryptor = AES.new(key, AES.MODE_CBC, iv)
             with open(output_filename, 'wb') as outfile:
@@ -84,7 +85,8 @@ class EncrypThor:
         input = open(path_in, 'rb')
         while 1:
             chunk = input.read(int(random.uniform(0.01, 1.4) * 1024*1000))
-            if not chunk: break
+            if not chunk:
+                break
             partnum = partnum + 1
             filename = os.path.join(path_out, ('%0d' % partnum))
             fileobj = open(filename, 'wb')
@@ -112,7 +114,8 @@ class EncrypThor:
             fileobj = open(filepath, 'rb')
             while 1:
                 filebytes = fileobj.read(readsize)
-                if not filebytes: break
+                if not filebytes:
+                    break
                 output.write(filebytes)
             fileobj.close()
         output.close()
@@ -132,7 +135,8 @@ class EncrypThor:
 
         # Rename each files
         for i in dir:
-            os.rename(src=f"{path_in}/{i}", dst=f"{path_in}/{''.join(random.choice(alphabet) for i in range(random.randrange(10,22)))}-{i}a7m.{secrets.token_urlsafe(16)}")
+            os.rename(
+                src=f"{path_in}/{i}", dst=f"{path_in}/{''.join(random.choice(alphabet) for i in range(random.randrange(10,22)))}-{i}a7m.{secrets.token_urlsafe(16)}")
 
     def sort_blocks(self, path_in):
         """Function so sort randomized blocks
@@ -148,7 +152,8 @@ class EncrypThor:
         for i in dir:
             idx_1 = i.find("-")
             idx_2 = i.find("a7m.")
-            os.rename(src=f"{path_in}/{i}", dst=f"{path_in}/{i[idx_1+1:idx_2]}")
+            os.rename(src=f"{path_in}/{i}",
+                      dst=f"{path_in}/{i[idx_1+1:idx_2]}")
 
     def keys_gen(self, password, salt=""):
         """Keys generator
@@ -160,7 +165,7 @@ class EncrypThor:
         Returns:
             str: your key as bytes
         """
-        
+
         # Check the salt
         if salt == "":
             # Generate the key
@@ -183,14 +188,15 @@ class EncrypThor:
         Returns:
             str: The salt
         """
-        
+
         # Init the salt generator with a common salt
         salt_init = b'\x18\x04\xa8\x92\xdf\\~\x9c\xf5\x85\xf3^n\r\x89\x1a\xdd\xe85\x11\xab\xe1ouTc\xec\x06\xdc\x8fj\xed'
         salt = PBKDF2(keyword, salt_init, dkLen=key_lenght)
 
         # Loop to randomize the salt generation
         for i in range(loop):
-            salt = PBKDF2(str(secrets.randbits(len(keyword)))+keyword+str(secrets.randbits(key_lenght*loop)), salt, dkLen=key_lenght)
+            salt = PBKDF2(str(secrets.randbits(len(keyword)))+keyword +
+                          str(secrets.randbits(key_lenght*loop)), salt, dkLen=key_lenght)
 
         # Return the salt
         return salt

@@ -15,7 +15,7 @@ def encryption_protocol_v2(path, key, keyword):
 
     # Init EncrypThor 2
     encrypthor = EncrypThor()
-    
+
     # Generate two keys from one key
     key_1 = encrypthor.keys_gen(password=keyword, salt=key)
     key_2 = encrypthor.keys_gen(password=keyword, salt=key_1)
@@ -28,7 +28,7 @@ def encryption_protocol_v2(path, key, keyword):
     os.remove(f"{path}.enc")
 
     # Will coming in next updates
-    #encrypthor.shuffle_blocks(path_in=f"{path}.encx")
+    # encrypthor.shuffle_blocks(path_in=f"{path}.encx")
 
     # List the files in the .encx folder
     dir = os.listdir(f"{path}.encx")
@@ -49,7 +49,7 @@ def decryption_protocol_v2(path, key, keyword):
         path (str): path of your file
         keyword (str): A random keyword
         key (str): Your key
-    """ 
+    """
 
     # Init EncrypThor 2
     encrypthor = EncrypThor()
@@ -59,7 +59,7 @@ def decryption_protocol_v2(path, key, keyword):
     key_2 = encrypthor.keys_gen(password=keyword, salt=key_1)
 
     # Will coming in next updates
-    #encrypthor.sort_blocks(path_in=f"{path}")
+    # encrypthor.sort_blocks(path_in=f"{path}")
 
     # List the files in the .encx folder
     dir_2 = os.listdir(f"{path}")
